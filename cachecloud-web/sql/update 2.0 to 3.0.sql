@@ -1,83 +1,83 @@
 CREATE TABLE `app_alert_record` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '×ÔÔöid',
-  `visible_type` int(1) NOT NULL COMMENT '¿É¼ûÀàĞÍ£¨0£º¾ù¿É¼û£»1£º½ö¹ÜÀíÔ±¿É¼û£»£©',
-  `important_level` int(1) NOT NULL COMMENT 'ÖØÒªÀàĞÍ£¨0£ºÒ»°ã£»1£ºÖØÒª£»2£º½ô¼±£©',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `app_id` bigint(20) DEFAULT NULL COMMENT 'app id',
-  `instance_id` bigint(20) DEFAULT NULL COMMENT 'ÊµÀıid',
-  `ip` varchar(16) COLLATE utf8_bin DEFAULT NULL COMMENT '»úÆ÷ip',
-  `port` int(10) DEFAULT NULL COMMENT '¶Ë¿ÚºÅ',
-  `title` varchar(255) COLLATE utf8_bin NOT NULL COMMENT '±¨¾¯±êÌâ',
-  `content` varchar(500) COLLATE utf8_bin NOT NULL COMMENT '±¨¾¯ÄÚÈİ',
-  PRIMARY KEY (`id`),
-  KEY `app_id` (`app_id`),
-  KEY `ip` (`ip`),
-  KEY `idx_inst_id` (`instance_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='±¨¾¯¼ÇÂ¼±í';
+`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'è‡ªå¢id',
+`visible_type` int(1) NOT NULL COMMENT 'å¯è§ç±»å‹ï¼ˆ0ï¼šå‡å¯è§ï¼›1ï¼šä»…ç®¡ç†å‘˜å¯è§ï¼›ï¼‰',
+`important_level` int(1) NOT NULL COMMENT 'é‡è¦ç±»å‹ï¼ˆ0ï¼šä¸€èˆ¬ï¼›1ï¼šé‡è¦ï¼›2ï¼šç´§æ€¥ï¼‰',
+`create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`app_id` bigint(20) DEFAULT NULL COMMENT 'app id',
+`instance_id` bigint(20) DEFAULT NULL COMMENT 'å®ä¾‹id',
+`ip` varchar(16) COLLATE utf8_bin DEFAULT NULL COMMENT 'æœºå™¨ip',
+`port` int(10) DEFAULT NULL COMMENT 'ç«¯å£å·',
+`title` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'æŠ¥è­¦æ ‡é¢˜',
+`content` varchar(500) COLLATE utf8_bin NOT NULL COMMENT 'æŠ¥è­¦å†…å®¹',
+PRIMARY KEY (`id`),
+KEY `app_id` (`app_id`),
+KEY `ip` (`ip`),
+KEY `idx_inst_id` (`instance_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='æŠ¥è­¦è®°å½•è¡¨';
 
 CREATE TABLE `config_restart_record` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `app_id` bigint(20) NOT NULL COMMENT 'Ó¦ÓÃid',
-  `app_name` varchar(36) NOT NULL COMMENT 'Ó¦ÓÃÃû³Æ',
-  `operate_type` char(1) NOT NULL COMMENT '²Ù×÷ÀàĞÍ£¨0:¹ö¶¯ÖØÆô£¬1:ĞŞ¸ÄÅäÖÃÇ¿ÖÆÖØÆô£»2£ºĞŞ¸ÄÅäÖÃ£©',
-  `param` varchar(2000) NOT NULL COMMENT '³õÊ¼»¯ÈÎÎñ²ÎÊı(json):²»±ä',
-  `status` tinyint(4) NOT NULL COMMENT '×´Ì¬£º0µÈ´ı£¬1ÔËĞĞ£¬2³É¹¦£¬3Ê§°Ü£¬4ÅäÖÃĞŞ¸Ä´ıÖØÆô',
-  `start_time` datetime NOT NULL COMMENT '¿ªÊ¼Ê±¼ä',
-  `end_time` datetime NOT NULL COMMENT '½áÊøÊ±¼ä',
-  `create_time` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `update_time` datetime NOT NULL COMMENT 'ĞŞ¸ÄÊ±¼ä',
-  `log` longtext COMMENT 'ÈÕÖ¾ĞÅÏ¢',
-  `user_name` varchar(64) DEFAULT NULL COMMENT '²Ù×÷ÈËÔ±ĞÕÃû',
-  `user_id` bigint(20) NOT NULL COMMENT 'ÓÃ»§id',
-  `instances` varchar(1000) DEFAULT NULL COMMENT 'Éæ¼°ÊµÀıidÁĞ±íµÄjson¸ñÊ½',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÖØÆô¼ÇÂ¼±í';
+ `id` bigint(20) NOT NULL AUTO_INCREMENT,
+ `app_id` bigint(20) NOT NULL COMMENT 'åº”ç”¨id',
+ `app_name` varchar(36) NOT NULL COMMENT 'åº”ç”¨åç§°',
+ `operate_type` char(1) NOT NULL COMMENT 'æ“ä½œç±»å‹ï¼ˆ0:æ»šåŠ¨é‡å¯ï¼Œ1:ä¿®æ”¹é…ç½®å¼ºåˆ¶é‡å¯ï¼›2ï¼šä¿®æ”¹é…ç½®ï¼‰',
+ `param` varchar(2000) NOT NULL COMMENT 'åˆå§‹åŒ–ä»»åŠ¡å‚æ•°(json):ä¸å˜',
+ `status` tinyint(4) NOT NULL COMMENT 'çŠ¶æ€ï¼š0ç­‰å¾…ï¼Œ1è¿è¡Œï¼Œ2æˆåŠŸï¼Œ3å¤±è´¥ï¼Œ4é…ç½®ä¿®æ”¹å¾…é‡å¯',
+ `start_time` datetime NOT NULL COMMENT 'å¼€å§‹æ—¶é—´',
+ `end_time` datetime NOT NULL COMMENT 'ç»“æŸæ—¶é—´',
+ `create_time` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+ `update_time` datetime NOT NULL COMMENT 'ä¿®æ”¹æ—¶é—´',
+ `log` longtext COMMENT 'æ—¥å¿—ä¿¡æ¯',
+ `user_name` varchar(64) DEFAULT NULL COMMENT 'æ“ä½œäººå‘˜å§“å',
+ `user_id` bigint(20) NOT NULL COMMENT 'ç”¨æˆ·id',
+ `instances` varchar(1000) DEFAULT NULL COMMENT 'æ¶‰åŠå®ä¾‹idåˆ—è¡¨çš„jsonæ ¼å¼',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='é‡å¯è®°å½•è¡¨';
 
 CREATE TABLE `module_info` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  `git_url` varchar(255) NOT NULL DEFAULT '' COMMENT 'git resource',
-  `info` varchar(128) DEFAULT NULL COMMENT 'Ä£¿éĞÅÏ¢ËµÃ÷',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0:ÎŞĞ§ 1:ÓĞĞ§',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='RedisÄ£¿éĞÅÏ¢±í';
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `name` varchar(64) NOT NULL,
+   `git_url` varchar(255) NOT NULL DEFAULT '' COMMENT 'git resource',
+   `info` varchar(128) DEFAULT NULL COMMENT 'æ¨¡å—ä¿¡æ¯è¯´æ˜',
+   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0:æ— æ•ˆ 1:æœ‰æ•ˆ',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Redisæ¨¡å—ä¿¡æ¯è¡¨';
 
 CREATE TABLE `module_version` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module_id` int(11) NOT NULL,
-  `version_id` int(11) NOT NULL COMMENT '¹ØÁª°æ±¾ºÅ',
-  `create_time` datetime DEFAULT NULL COMMENT '´´½¨Ê±¼ä',
-  `so_path` varchar(255) DEFAULT NULL COMMENT '±àÒëºóso¿âµÄµØÖ·',
-  `tag` varchar(64) NOT NULL COMMENT 'Ä£¿é°æ±¾ºÅ',
-  `status` int(255) NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ¿ÉÓÃ(¹ØÁªsoµØÖ·)£º0 ²»¿ÉÓÃ 1£º¿ÉÓÃ',
+  `version_id` int(11) NOT NULL COMMENT 'å…³è”ç‰ˆæœ¬å·',
+  `create_time` datetime DEFAULT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `so_path` varchar(255) DEFAULT NULL COMMENT 'ç¼–è¯‘åsoåº“çš„åœ°å€',
+  `tag` varchar(64) NOT NULL COMMENT 'æ¨¡å—ç‰ˆæœ¬å·',
+  `status` int(255) NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦å¯ç”¨(å…³è”soåœ°å€)ï¼š0 ä¸å¯ç”¨ 1ï¼šå¯ç”¨',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='RedisÄ£¿é°æ±¾¹ÜÀí±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Redisæ¨¡å—ç‰ˆæœ¬ç®¡ç†è¡¨';
 
 CREATE TABLE `app_import` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `app_id` bigint(20) DEFAULT NULL COMMENT 'Ä¿±êÓ¦ÓÃid',
-  `instance_info` text COMMENT 'Ô´redisÊµÀıĞÅÏ¢',
-  `redis_password` varchar(200) DEFAULT NULL COMMENT 'Ô´redisÃÜÂë',
-  `status` int(11) DEFAULT NULL COMMENT 'Ç¨ÒÆ×´Ì¬£ºPREPARE(0, "×¼±¸", "Ó¦ÓÃµ¼Èë-Î´¿ªÊ¼"),     START(1, "½øĞĞÖĞ...", "Ó¦ÓÃµ¼Èë-¿ªÊ¼"),     ERROR(2, "error", "Ó¦ÓÃµ¼Èë-³ö´í"),     VERSION_BUILD_START(11, "½øĞĞÖĞ...", "ĞÂ½¨redis°æ±¾-½øĞĞÖĞ"),     VERSION_BUILD_ERROR(12, "error", "ĞÂ½¨redis°æ±¾-³ö´í"),     VERSION_BUILD_END(20, "³É¹¦", "ĞÂ½¨redis°æ±¾-Íê³É"),     APP_BUILD_INIT(21, "×¼±¸¾ÍĞ÷", "ĞÂ½¨redisÓ¦ÓÃ-×¼±¸¾ÍĞ÷"),     APP_BUILD_START(22, "½øĞĞÖĞ...", "ĞÂ½¨redisÓ¦ÓÃ-½øĞĞÖĞ"),     APP_BUILD_ERROR(23, "error", "ĞÂ½¨redisÓ¦ÓÃ-³ö´í"),     APP_BUILD_END(30, "³É¹¦", "ĞÂ½¨redisÓ¦ÓÃ-Íê³É"),     MIGRATE_INIT(31, "×¼±¸¾ÍĞ÷", "Êı¾İÇ¨ÒÆ-×¼±¸¾ÍĞ÷"),     MIGRATE_START(32, "½øĞĞÖĞ...", "Êı¾İÇ¨ÒÆ-½øĞĞÖĞ"),     MIGRATE_ERROR(33, "error", "Êı¾İÇ¨ÒÆ-³ö´í"),     MIGRATE_END(3, "³É¹¦", "Ó¦ÓÃµ¼Èë-³É¹¦")',
-  `step` int(11) DEFAULT NULL COMMENT 'µ¼Èë½×¶Î',
+  `app_id` bigint(20) DEFAULT NULL COMMENT 'ç›®æ ‡åº”ç”¨id',
+  `instance_info` text COMMENT 'æºrediså®ä¾‹ä¿¡æ¯',
+  `redis_password` varchar(200) DEFAULT NULL COMMENT 'æºrediså¯†ç ',
+  `status` int(11) DEFAULT NULL COMMENT 'è¿ç§»çŠ¶æ€ï¼šPREPARE(0, "å‡†å¤‡", "åº”ç”¨å¯¼å…¥-æœªå¼€å§‹"), START(1, "è¿›è¡Œä¸­...", "åº”ç”¨å¯¼å…¥-å¼€å§‹"), ERROR(2, "error", "åº”ç”¨å¯¼å…¥-å‡ºé”™"), VERSION_BUILD_START(11, "è¿›è¡Œä¸­...", "æ–°å»ºredisç‰ˆæœ¬-è¿›è¡Œä¸­"), VERSION_BUILD_ERROR(12, "error", "æ–°å»ºredisç‰ˆæœ¬-å‡ºé”™"), VERSION_BUILD_END(20, "æˆåŠŸ", "æ–°å»ºredisç‰ˆæœ¬-å®Œæˆ"), APP_BUILD_INIT(21, "å‡†å¤‡å°±ç»ª", "æ–°å»ºredisåº”ç”¨-å‡†å¤‡å°±ç»ª"), APP_BUILD_START(22, "è¿›è¡Œä¸­...", "æ–°å»ºredisåº”ç”¨-è¿›è¡Œä¸­"), APP_BUILD_ERROR(23, "error", "æ–°å»ºredisåº”ç”¨-å‡ºé”™"), APP_BUILD_END(30, "æˆåŠŸ", "æ–°å»ºredisåº”ç”¨-å®Œæˆ"), MIGRATE_INIT(31, "å‡†å¤‡å°±ç»ª", "æ•°æ®è¿ç§»-å‡†å¤‡å°±ç»ª"), MIGRATE_START(32, "è¿›è¡Œä¸­...", "æ•°æ®è¿ç§»-è¿›è¡Œä¸­"), MIGRATE_ERROR(33, "error", "æ•°æ®è¿ç§»-å‡ºé”™"), MIGRATE_END(3, "æˆåŠŸ", "åº”ç”¨å¯¼å…¥-æˆåŠŸ")',
+  `step` int(11) DEFAULT NULL COMMENT 'å¯¼å…¥é˜¶æ®µ',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `migrate_id` bigint(20) DEFAULT NULL COMMENT 'Êı¾İÇ¨ÒÆid',
-  `mem_size` int(11) DEFAULT NULL COMMENT 'Ä¿±êÓ¦ÓÃÄÚ´æ´óĞ¡£¬µ¥Î»G',
-  `redis_version_name` varchar(20) DEFAULT NULL COMMENT 'Ä¿±êÓ¦ÓÃredis°æ±¾£¬¸ñÊ½£ºredis-x.x.x',
-  `app_build_task_id` bigint(20) DEFAULT NULL COMMENT 'Ä¿±êÓ¦ÓÃ²¿ÊğÈÎÎñid',
-  `source_type` int(11) DEFAULT NULL COMMENT 'Ô´redisÀàĞÍ£º7:cluster, 6:sentinel, 5:standalone',
+  `migrate_id` bigint(20) DEFAULT NULL COMMENT 'æ•°æ®è¿ç§»id',
+  `mem_size` int(11) DEFAULT NULL COMMENT 'ç›®æ ‡åº”ç”¨å†…å­˜å¤§å°ï¼Œå•ä½G',
+  `redis_version_name` varchar(20) DEFAULT NULL COMMENT 'ç›®æ ‡åº”ç”¨redisç‰ˆæœ¬ï¼Œæ ¼å¼ï¼šredis-x.x.x',
+  `app_build_task_id` bigint(20) DEFAULT NULL COMMENT 'ç›®æ ‡åº”ç”¨éƒ¨ç½²ä»»åŠ¡id',
+  `source_type` int(11) DEFAULT NULL COMMENT 'æºredisç±»å‹ï¼š7:cluster, 6:sentinel, 5:standalone',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- instance_alert_configs change
-ALTER TABLE instance_alert_configs ADD important_level TINYINT(4) DEFAULT 0 NOT NULL COMMENT 'ÖØÒª³Ì¶È£¨0£ºÒ»°ã£»1£ºÖØÒª£»2£º½ô¼±£©';
+ALTER TABLE instance_alert_configs ADD important_level TINYINT(4) DEFAULT 0 NOT NULL COMMENT 'é‡è¦ç¨‹åº¦ï¼ˆ0ï¼šä¸€èˆ¬ï¼›1ï¼šé‡è¦ï¼›2ï¼šç´§æ€¥ï¼‰';
 
 -- app_user change
-ALTER TABLE app_user ADD password varchar(64) NULL COMMENT 'ÃÜÂë';
-ALTER TABLE app_user ADD register_time DATETIME DEFAULT CURRENT_TIMESTAMP NULL COMMENT '×¢²áÊ±¼ä';
-ALTER TABLE app_user ADD purpose varchar(255) NULL COMMENT 'Ê¹ÓÃÄ¿µÄ';
-ALTER TABLE app_user ADD company varchar(255) NULL COMMENT '¹«Ë¾Ãû³Æ';
+ALTER TABLE app_user ADD password varchar(64) NULL COMMENT 'å¯†ç ';
+ALTER TABLE app_user ADD register_time DATETIME DEFAULT CURRENT_TIMESTAMP NULL COMMENT 'æ³¨å†Œæ—¶é—´';
+ALTER TABLE app_user ADD purpose varchar(255) NULL COMMENT 'ä½¿ç”¨ç›®çš„';
+ALTER TABLE app_user ADD company varchar(255) NULL COMMENT 'å…¬å¸åç§°';
 
 -- module_info change
 ALTER TABLE module_info ADD CONSTRAINT `NAMEKEY` UNIQUE KEY (name);
