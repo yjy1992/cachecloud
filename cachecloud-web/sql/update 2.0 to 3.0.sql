@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `app_alert_record`;
 CREATE TABLE `app_alert_record` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
 `visible_type` int(1) NOT NULL COMMENT '可见类型（0：均可见；1：仅管理员可见；）',
@@ -15,6 +16,7 @@ KEY `ip` (`ip`),
 KEY `idx_inst_id` (`instance_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='报警记录表';
 
+DROP TABLE IF EXISTS `config_restart_record`;
 CREATE TABLE `config_restart_record` (
  `id` bigint(20) NOT NULL AUTO_INCREMENT,
  `app_id` bigint(20) NOT NULL COMMENT '应用id',
@@ -33,6 +35,7 @@ CREATE TABLE `config_restart_record` (
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='重启记录表';
 
+DROP TABLE IF EXISTS `module_info`;
 CREATE TABLE `module_info` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `name` varchar(64) NOT NULL,
@@ -42,6 +45,7 @@ CREATE TABLE `module_info` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Redis模块信息表';
 
+DROP TABLE IF EXISTS `module_version`;
 CREATE TABLE `module_version` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module_id` int(11) NOT NULL,
@@ -53,6 +57,7 @@ CREATE TABLE `module_version` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Redis模块版本管理表';
 
+DROP TABLE IF EXISTS `app_import`;
 CREATE TABLE `app_import` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `app_id` bigint(20) DEFAULT NULL COMMENT '目标应用id',
