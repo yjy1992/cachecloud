@@ -43,7 +43,7 @@
         order by current_min asc
     </select>
 
-    <select id="getAppClientCmdStat" resultType="AppClientStatisticGather">
+    <select id="getAppClientCmdStat" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, sum(count) as cmd_count, SUM(cost)/sum(count) as avg_cmd_cost, DATE_FORMAT(current_min,'%Y-%m-%d') gather_time
         from app_client_command_minute_statistics
         where current_min between #{startTime} and #{endTime}

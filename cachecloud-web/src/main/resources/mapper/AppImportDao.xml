@@ -14,20 +14,20 @@
         where id=#{id}
     </select>
 
-    <insert id="save" parameterType="AppImport" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.entity.AppImport" keyProperty="id" useGeneratedKeys="true">
         insert into app_import
         (<include refid="columns"/>)
         values
         (#{id},#{appId},#{memSize},#{sourceType},#{redisVersionName},#{instanceInfo},#{redisPassword},#{status},#{step},#{appBuildTaskId},#{migrateId})
     </insert>
 
-    <update id="update" parameterType="AppImport">
+    <update id="update" parameterType="com.sohu.cache.entity.AppImport">
     	update app_import
     		set app_id=#{appId},mem_size=#{memSize},source_type=#{sourceType}, redis_version_name=#{redisVersionName},instance_info=#{instanceInfo}, redis_password=#{redisPassword}, status=#{status}, step=#{step},app_build_task_id=#{appBuildTaskId}, migrate_id=#{migrateId}
     	where id=#{id}
     </update>
 
-    <select id="getAppImports" resultType="AppImport" parameterType="int">
+    <select id="getAppImports" resultType="com.sohu.cache.entity.AppImport" parameterType="int">
         select id,
         <include refid="columns"/>,create_time,update_time
         from app_import where 1=1

@@ -99,7 +99,7 @@
         group by node
     </select>
 
-    <select id="getAppClientConnExpStat" resultType="AppClientStatisticGather">
+    <select id="getAppClientConnExpStat" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, sum(count) as conn_exp_count, sum(cost)/sum(count) as avg_conn_exp_cost, DATE_FORMAT(current_min,'%Y-%m-%d') gather_time
         from app_client_exception_minute_statistics
         where type=0 and current_min between #{startTime} and #{endTime}
@@ -112,7 +112,7 @@
         where app_id = #{appId} and type=0 and current_min between #{startTime} and #{endTime}
     </select>
 
-    <select id="getAppClientCmdExpStat" resultType="AppClientStatisticGather">
+    <select id="getAppClientCmdExpStat" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, sum(count) as cmd_exp_count, sum(cost)/sum(count) as avg_cmd_exp_cost, DATE_FORMAT(current_min,'%Y-%m-%d') gather_time
         from app_client_exception_minute_statistics
         where type=1 and current_min between #{startTime} and #{endTime}

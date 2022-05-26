@@ -76,13 +76,13 @@ CREATE TABLE `app_import` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- instance_alert_configs change
-ALTER TABLE instance_alert_configs ADD important_level TINYINT(4) DEFAULT 0 NOT NULL COMMENT '重要程度（0：一般；1：重要；2：紧急）';
+-- ALTER TABLE instance_alert_configs ADD important_level TINYINT(4) DEFAULT 0 NOT NULL COMMENT '重要程度（0：一般；1：重要；2：紧急）';
 
 -- app_user change
-ALTER TABLE app_user ADD password varchar(64) NULL COMMENT '密码';
-ALTER TABLE app_user ADD register_time DATETIME DEFAULT CURRENT_TIMESTAMP NULL COMMENT '注册时间';
-ALTER TABLE app_user ADD purpose varchar(255) NULL COMMENT '使用目的';
-ALTER TABLE app_user ADD company varchar(255) NULL COMMENT '公司名称';
+-- ALTER TABLE app_user ADD password varchar(64) NULL COMMENT '密码';
+-- ALTER TABLE app_user ADD register_time DATETIME DEFAULT CURRENT_TIMESTAMP NULL COMMENT '注册时间';
+-- ALTER TABLE app_user ADD purpose varchar(255) NULL COMMENT '使用目的';
+-- ALTER TABLE app_user ADD company varchar(255) NULL COMMENT '公司名称';
 
 -- module_info change
 ALTER TABLE module_info ADD CONSTRAINT `NAMEKEY` UNIQUE KEY (name);

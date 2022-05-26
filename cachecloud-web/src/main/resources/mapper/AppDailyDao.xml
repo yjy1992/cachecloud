@@ -12,7 +12,7 @@
 		client_cmd_count,client_avg_cmd_cost,client_conn_exp_count,client_avg_conn_exp_cost,client_cmd_exp_count,client_avg_cmd_exp_cost
     </sql>
     
-    <insert id="save" parameterType="AppDailyData" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.entity.AppDailyData" keyProperty="id" useGeneratedKeys="true">
     	insert into app_daily
     		(<include refid="app_daily_column"/>)
 		values
@@ -24,7 +24,7 @@
 		#{clientCmdCount},#{clientAvgCmdCost},#{clientConnExpCount},#{clientAvgConnExpCost},#{clientCmdExpCount},#{clientAvgCmdExpCost})
     </insert>
     
-    <select id="getAppDaily" resultType="AppDailyData">
+    <select id="getAppDaily" resultType="com.sohu.cache.entity.AppDailyData">
 		select id,<include refid="app_daily_column"/> from app_daily where app_id=#{appId} and date =#{date}
 	</select>
     

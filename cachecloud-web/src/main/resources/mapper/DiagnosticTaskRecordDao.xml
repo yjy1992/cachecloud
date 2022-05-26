@@ -18,7 +18,7 @@
         where id=#{id}
     </update>
 
-    <select id="getDiagnosticTaskRecords" resultType="DiagnosticTaskRecord">
+    <select id="getDiagnosticTaskRecords" resultType="com.sohu.cache.entity.DiagnosticTaskRecord">
         select *,concat(concat(cost div 60000, 'm:'), concat(cost mod 60000 div 1000 , 's:'), concat(cost mod 1000, 'ms')) as format_cost_time
         from diagnostic_task_record
         where 1=1

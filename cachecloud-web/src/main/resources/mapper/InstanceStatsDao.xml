@@ -7,7 +7,7 @@
         inst_id,app_id,host_id,ip,port,role,max_memory,used_memory,curr_items,curr_connections,misses,hits,modify_time,mem_fragmentation_ratio,aof_delayed_fsync
     </sql>
 
-    <insert id="updateInstanceStats" parameterType="InstanceStats">
+    <insert id="updateInstanceStats" parameterType="com.sohu.cache.entity.InstanceStats">
         INSERT INTO instance_statistics
           (<include refid="instance_statistics_columns"/>)
         VALUES (#{instId},#{appId},#{hostId},#{ip},#{port},#{role},#{maxMemory},#{usedMemory},#{currItems},#{currConnections},#{misses},#{hits},
@@ -27,31 +27,31 @@
           aof_delayed_fsync = #{aofDelayedFsync}
     </insert>
 
-    <select id="getInstanceStatsByHost" resultType="InstanceStats">
+    <select id="getInstanceStatsByHost" resultType="com.sohu.cache.entity.InstanceStats">
         select id,<include refid="instance_statistics_columns"/>
         from instance_statistics
         where ip = #{ip} and port = #{port}
     </select>
 
-    <select id="getInstanceStatsByIp" resultType="InstanceStats">
+    <select id="getInstanceStatsByIp" resultType="com.sohu.cache.entity.InstanceStats">
         select id,<include refid="instance_statistics_columns"/>
         from instance_statistics
         where ip = #{ip}
     </select>
 
-    <select id="getInstanceStatsByInsId" resultType="InstanceStats">
+    <select id="getInstanceStatsByInsId" resultType="com.sohu.cache.entity.InstanceStats">
         select id,<include refid="instance_statistics_columns"/>
         from instance_statistics
         where inst_id = #{id}
     </select>
 
-    <select id="getInstanceStatsByAppId" resultType="InstanceStats">
+    <select id="getInstanceStatsByAppId" resultType="com.sohu.cache.entity.InstanceStats">
         select id,<include refid="instance_statistics_columns"/>
         from instance_statistics
         where app_id = #{appId}
     </select>
 
-    <select id="getInstanceStats" resultType="InstanceStats">
+    <select id="getInstanceStats" resultType="com.sohu.cache.entity.InstanceStats">
         select id,<include refid="instance_statistics_columns"/>
         from instance_statistics
     </select>
@@ -77,7 +77,7 @@
         and role=1;
     </select>
 
-    <select id="getMachineInstanceStatList" resultType="MachineInstanceStat">
+    <select id="getMachineInstanceStatList" resultType="com.sohu.cache.entity.MachineInstanceStat">
         SELECT stat.ip,sum(stat.max_memory) as max_memory,sum(stat.used_memory) as used_memory
         from instance_statistics stat,instance_info info
         where stat.inst_id = info.id and info.status=1 group by stat.ip;

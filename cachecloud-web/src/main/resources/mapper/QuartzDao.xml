@@ -9,14 +9,14 @@
     </sql>
 
     <!--查询job分组下的所有trigger-->
-    <select id="getTriggersByJobGroup" resultType="TriggerInfo" parameterType="String">
+    <select id="getTriggersByJobGroup" resultType="com.sohu.cache.entity.TriggerInfo" parameterType="String">
         SELECT <include refid="quartz_triggers_columns"/>
         FROM QRTZ_TRIGGERS t
         WHERE JOB_GROUP = #{jobGroup};
     </select>
 
     <!--返回所有trigger-->
-    <select id="getAllTriggers" resultType="TriggerInfo">
+    <select id="getAllTriggers" resultType="com.sohu.cache.entity.TriggerInfo">
         SELECT <include refid="quartz_triggers_columns"/>, ifnull(ct.CRON_EXPRESSION,'') cron
         FROM QRTZ_TRIGGERS t
         LEFT JOIN QRTZ_CRON_TRIGGERS ct
@@ -24,7 +24,7 @@
     </select>
 
     <!--查询trigger：模糊匹配trigger name或trigger group-->
-    <select id="searchTriggerByNameOrGroup" resultType="TriggerInfo" parameterType="String">
+    <select id="searchTriggerByNameOrGroup" resultType="com.sohu.cache.entity.TriggerInfo" parameterType="String">
         SELECT <include refid="quartz_triggers_columns"/>, ifnull(ct.CRON_EXPRESSION,'') cron
         FROM QRTZ_TRIGGERS t
         LEFT JOIN QRTZ_CRON_TRIGGERS ct

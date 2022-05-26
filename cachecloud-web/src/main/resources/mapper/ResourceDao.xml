@@ -41,12 +41,12 @@
 		from system_resource where name = #{resourceName} and status=1
 	</select>
 
-	<insert id="save" parameterType="SystemResource" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+	<insert id="save" parameterType="com.sohu.cache.entity.SystemResource" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
 		insert into system_resource (<include refid="resource_columns"/>)
 		value(<include refid="resource_fields"/>);
 	</insert>
 
-	<update id="update" parameterType="SystemResource">
+	<update id="update" parameterType="com.sohu.cache.entity.SystemResource">
 		update system_resource
 		set name=#{name}, intro=#{intro}, type=#{type}, url=#{url},dir=#{dir}, ispush=#{ispush}, lastmodify=now(),
 		status=#{status}, username=#{username}, task_id=#{taskId}

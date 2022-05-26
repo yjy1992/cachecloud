@@ -6,7 +6,7 @@
 		app_id,collect_time,client_ip,report_time,create_time,exception_class,exception_count,instance_host,instance_port,instance_id,type
 	</sql>
 	
-	<insert id="save" parameterType="AppClientExceptionStat"
+	<insert id="save" parameterType="com.sohu.cache.entity.AppClientExceptionStat"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into app_client_exception_minute_stat(<include refid="columns" />)
 		values(#{appId},#{collectTime},#{clientIp},#{reportTime},#{createTime},#{exceptionClass},#{exceptionCount},#{instanceHost},#{instancePort},#{instanceId},#{type})
@@ -21,7 +21,7 @@
 	    </foreach>
 	</insert>
 	
-	<select id="getAppExceptionList" resultType="AppClientExceptionStat">
+	<select id="getAppExceptionList" resultType="com.sohu.cache.entity.AppClientExceptionStat">
     	select id,<include refid="columns" />
     	from app_client_exception_minute_stat
     	where app_id=#{appId} and collect_time between #{startTime} and #{endTime}

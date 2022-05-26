@@ -8,7 +8,7 @@
     </sql>
 
     <!--通过type查询实例列表-->
-    <select id="getInstListByType" resultType="InstanceInfo" parameterType="int">
+    <select id="getInstListByType" resultType="com.sohu.cache.entity.InstanceInfo" parameterType="int">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -17,7 +17,7 @@
     </select>
 
     <!--通过appId查询实例列表-->
-    <select id="getInstListByAppId" resultType="InstanceInfo" parameterType="long">
+    <select id="getInstListByAppId" resultType="com.sohu.cache.entity.InstanceInfo" parameterType="long">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -26,7 +26,7 @@
     </select>
 
     <!--通过appId查询有效的实例列表-->
-    <select id="getEffectiveInstListByAppId" resultType="InstanceInfo" parameterType="long">
+    <select id="getEffectiveInstListByAppId" resultType="com.sohu.cache.entity.InstanceInfo" parameterType="long">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -47,14 +47,14 @@
     </select>
 
     <!--通过host和port查询一个实例信息-->
-    <select id="getInstByIpAndPort" resultType="InstanceInfo">
+    <select id="getInstByIpAndPort" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
         WHERE ip = #{ip} AND port = #{port} AND status = 1
     </select>
 
-    <select id="getAllInstByIpAndPort" resultType="InstanceInfo">
+    <select id="getAllInstByIpAndPort" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -62,21 +62,21 @@
     </select>
 
     <!--通过host和port查询一个实例信息-->
-    <select id="getAllInsts" resultType="InstanceInfo">
+    <select id="getAllInsts" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
         WHERE status in (0,1)
     </select>
 
-    <select id="checkHeartStopInstance" resultType="InstanceInfo">
+    <select id="checkHeartStopInstance" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
         WHERE ip = #{ip} and status in (0,1)
     </select>
 
-    <select id="getAllHeartStopInstance" resultType="InstanceInfo">
+    <select id="getAllHeartStopInstance" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -91,7 +91,7 @@
     </select>
 
     <!--通过id查询一个实例信息-->
-    <select id="getInstanceInfoById" resultType="InstanceInfo">
+    <select id="getInstanceInfoById" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info
@@ -99,12 +99,12 @@
     </select>
 
     <!--保存实例-->
-    <insert id="saveInstance" parameterType="InstanceInfo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    <insert id="saveInstance" parameterType="com.sohu.cache.entity.InstanceInfo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO instance_info (app_id, host_id, ip, port, status, mem, conn, cmd, type)
         VALUE(#{appId}, #{hostId}, #{ip}, #{port}, #{status}, #{mem}, #{conn}, #{cmd}, #{type});
     </insert>
 
-    <update id="update" parameterType="InstanceInfo">
+    <update id="update" parameterType="com.sohu.cache.entity.InstanceInfo">
         update instance_info
         set
         <if test="appId != null">app_id=#{appId},</if>
@@ -120,11 +120,11 @@
         id=#{id}
     </update>
 
-    <select id="getAppInstanceInfo" parameterType="long" resultType="InstanceInfo">
-        select
-        <include refid="instance_info_columns"/>
-        from instance_info where app_id=#{appId} and status=1
-    </select>
+<!--    <select id="getAppInstanceInfo" parameterType="long" resultType="com.sohu.cache.entity.InstanceInfo">-->
+<!--        select-->
+<!--        <include refid="instance_info_columns"/>-->
+<!--        from instance_info where app_id=#{appId} and status=1-->
+<!--    </select>-->
 
     <select id="getInstanceTypeCount" resultType="int">
         select count(*)
@@ -132,14 +132,14 @@
         where ip = #{ip} and type = #{type}
     </select>
 
-    <select id="getInstancesByType" resultType="InstanceInfo">
+    <select id="getInstancesByType" resultType="com.sohu.cache.entity.InstanceInfo">
         select  <include refid="instance_info_columns"/>
         from instance_info
         where app_id = #{app_id} and type = #{type} and status=1
     </select>
     
     <!--通过机器ip查询实例列表-->
-    <select id="getInstListByIp" resultType="InstanceInfo" parameterType="string">
+    <select id="getInstListByIp" resultType="com.sohu.cache.entity.InstanceInfo" parameterType="string">
         SELECT
         <include refid="instance_info_columns"/>
         FROM instance_info

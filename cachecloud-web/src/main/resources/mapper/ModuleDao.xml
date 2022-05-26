@@ -15,22 +15,22 @@
    		#{id}, #{name}, #{git_url},#{info}
    	</sql>
 
-     <select id="getAllModules" resultType="ModuleInfo">
+     <select id="getAllModules" resultType="com.sohu.cache.entity.ModuleInfo">
         select <include refid="module_info_columns"/>
         from module_info  where  status=1
     </select>
 
-     <select id="getModule" resultType="ModuleInfo">
+     <select id="getModule" resultType="com.sohu.cache.entity.ModuleInfo">
         select <include refid="module_info_columns"/>
         from module_info where name=#{moduleName}
     </select>
 
-    <select id="getVersion" resultType="ModuleVersion">
+    <select id="getVersion" resultType="com.sohu.cache.entity.ModuleVersion">
         select <include refid="module_version_columns"/>
         from module_version where id=#{versionId}
     </select>
 
-    <select id="getAllVersions" resultType="ModuleVersion">
+    <select id="getAllVersions" resultType="com.sohu.cache.entity.ModuleVersion">
         select <include refid="module_version_columns"/>
         from module_version where module_id = #{moduleId}
     </select>
@@ -39,14 +39,14 @@
         update module_info set status=0 where id = #{moduleId}
     </select>
 
-    <insert id="saveOrUpdate" parameterType="ModuleInfo">
+    <insert id="saveOrUpdate" parameterType="com.sohu.cache.entity.ModuleInfo">
         insert into module_info(name,git_url,info)
         values(#{name},#{gitUrl},#{info})
         on duplicate key update
         name = #{name}, git_url = #{gitUrl},info = #{info}
     </insert>
 
-    <insert id="saveOrUpdateVersion" parameterType="ModuleVersion">
+    <insert id="saveOrUpdateVersion" parameterType="com.sohu.cache.entity.ModuleVersion">
         insert into module_version(id,module_id,version_id,tag,create_time,status,so_path)
         values(#{id},#{moduleId},#{versionId},#{tag},now(),#{status},#{soPath})
         on duplicate key update

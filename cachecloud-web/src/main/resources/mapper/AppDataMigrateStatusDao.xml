@@ -9,7 +9,7 @@
         user_id,status,start_time,end_time,log_path,config_path
     </sql>
 
-    <insert id="save" parameterType="AppDataMigrateStatus" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.entity.AppDataMigrateStatus" keyProperty="id" useGeneratedKeys="true">
         insert into app_data_migrate_status
         (<include refid="migrate_data_status_fields"/>)
         values
@@ -70,7 +70,7 @@
         </choose>
     </select>
 
-    <select id="search" resultType="AppDataMigrateStatus">
+    <select id="search" resultType="com.sohu.cache.entity.AppDataMigrateStatus">
         select app_data_migrate_status.id,<include refid="migrate_data_status_fields"/>,app_user.ch_name as user_name
         from app_data_migrate_status, app_user where 1=1 and app_data_migrate_status.user_id=app_user.id
         <choose>
@@ -140,14 +140,14 @@
         </choose>
     </select>
 
-    <select id="get" resultType="AppDataMigrateStatus">
+    <select id="get" resultType="com.sohu.cache.entity.AppDataMigrateStatus">
         select id,
         <include refid="migrate_data_status_fields"/>
         from app_data_migrate_status where id = #{id}
     </select>
 
 
-    <select id="getByMigrateId" resultType="AppDataMigrateStatus">
+    <select id="getByMigrateId" resultType="com.sohu.cache.entity.AppDataMigrateStatus">
         select id,
         <include refid="migrate_data_status_fields"/>
         from app_data_migrate_status where migrate_id = #{migrateId}

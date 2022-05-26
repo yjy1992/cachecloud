@@ -22,7 +22,7 @@
             create_time = now(),
             accumulation = accumulation + 1;
     </sql>
-	<insert id="save" parameterType="AppClientCostTimeTotalStat" keyProperty="id" useGeneratedKeys="true">
+	<insert id="save" parameterType="com.sohu.cache.entity.AppClientCostTimeTotalStat" keyProperty="id" useGeneratedKeys="true">
 		 insert into app_client_costtime_minute_stat_total
 		 (<include refid="columns"/>)
         values
@@ -45,7 +45,7 @@
    		select command from app_client_costtime_minute_stat_total where app_id=#{appId} and collect_time between #{startTime} and #{endTime} group by command order by sum(total_count) desc;
     </select>
     
-    <select id="getAppClientCommandStat" resultType="AppClientCostTimeTotalStat">
+    <select id="getAppClientCommandStat" resultType="com.sohu.cache.entity.AppClientCostTimeTotalStat">
     	select id,<include refid="columns"/> from app_client_costtime_minute_stat_total
     	where app_id=#{appId} and collect_time between #{startTime} and #{endTime} and command=#{command}
     </select>

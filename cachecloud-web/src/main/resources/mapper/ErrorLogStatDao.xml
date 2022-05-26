@@ -11,7 +11,7 @@
         #{className}, #{collectTime}, #{ip}, #{port}, #{diffErrorCount}, #{totalErrorCount}, #{createTime}, #{updateTime}
     </sql>
 
-    <insert id="save" parameterType="ErrorLogStat" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.entity.ErrorLogStat" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         insert into error_log_stat (<include refid="error_log_columns"/>)
         value(<include refid="error_log_fields"/>);
     </insert>

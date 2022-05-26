@@ -242,56 +242,56 @@
     </select>
 
 
-    <select id="getExpAppStatsByGatherTime" resultType="hashmap">
-        select app_client_statistic_gather.app_id as app_id,is_test,
-        (conn_exp_count + cmd_exp_count) as exp_count,
-        conn_exp_count,cmd_exp_count,
-        slow_log_count,latency_count
-        from app_client_statistic_gather,app_desc
-        where gather_time = #{gatherTime}
-        and app_client_statistic_gather.app_id = app_desc.app_id
-        and app_desc.is_test = 0
-        and conn_exp_count + cmd_exp_count > 0
-        ORDER BY exp_count DESC
-    </select>
+<!--    <select id="getExpAppStatsByGatherTime" resultType="hashmap">-->
+<!--        select app_client_statistic_gather.app_id as app_id,is_test,-->
+<!--        (conn_exp_count + cmd_exp_count) as exp_count,-->
+<!--        conn_exp_count,cmd_exp_count,-->
+<!--        slow_log_count,latency_count-->
+<!--        from app_client_statistic_gather,app_desc-->
+<!--        where gather_time = #{gatherTime}-->
+<!--        and app_client_statistic_gather.app_id = app_desc.app_id-->
+<!--        and app_desc.is_test = 0-->
+<!--        and conn_exp_count + cmd_exp_count > 0-->
+<!--        ORDER BY exp_count DESC-->
+<!--    </select>-->
 
 
-    <select id="getLatencyAppStatsByGatherTime" resultType="hashmap">
-        select app_client_statistic_gather.app_id as app_id,is_test,
-        slow_log_count,latency_count
-        from app_client_statistic_gather,app_desc
-        where gather_time = #{gatherTime}
-        and app_client_statistic_gather.app_id = app_desc.app_id
-        and app_desc.is_test = 0
-        and slow_log_count>100
-        ORDER BY slow_log_count DESC
-        LIMIT 10
-    </select>
+<!--    <select id="getLatencyAppStatsByGatherTime" resultType="hashmap">-->
+<!--        select app_client_statistic_gather.app_id as app_id,is_test,-->
+<!--        slow_log_count,latency_count-->
+<!--        from app_client_statistic_gather,app_desc-->
+<!--        where gather_time = #{gatherTime}-->
+<!--        and app_client_statistic_gather.app_id = app_desc.app_id-->
+<!--        and app_desc.is_test = 0-->
+<!--        and slow_log_count>100-->
+<!--        ORDER BY slow_log_count DESC-->
+<!--        LIMIT 10-->
+<!--    </select>-->
 
 
-    <select id="getMemAlterAppStatsByGatherTime" resultType="hashmap">
-        select app_client_statistic_gather.app_id as app_id,is_test,
-        mem_used_ratio,round(used_memory/1024/1024,2) as format_used_memory
-        from app_client_statistic_gather,app_desc
-        where gather_time = #{gatherTime}
-        and app_client_statistic_gather.app_id = app_desc.app_id
-        and app_desc.is_test = 0
-        and mem_used_ratio &lt; 50
-        ORDER BY mem_used_ratio asc
-        LIMIT 10
-    </select>
+<!--    <select id="getMemAlterAppStatsByGatherTime" resultType="hashmap">-->
+<!--        select app_client_statistic_gather.app_id as app_id,is_test,-->
+<!--        mem_used_ratio,round(used_memory/1024/1024,2) as format_used_memory-->
+<!--        from app_client_statistic_gather,app_desc-->
+<!--        where gather_time = #{gatherTime}-->
+<!--        and app_client_statistic_gather.app_id = app_desc.app_id-->
+<!--        and app_desc.is_test = 0-->
+<!--        and mem_used_ratio &lt; 50-->
+<!--        ORDER BY mem_used_ratio asc-->
+<!--        LIMIT 10-->
+<!--    </select>-->
 
 
-    <select id="getFragRatioAppStatsByGatherTime" resultType="hashmap">
-        select app_client_statistic_gather.app_id as app_id,is_test,
-        round(used_memory/1024/1024,2) as format_used_memory,
-        round(used_memory_rss/1024/1024,2) as format_used_memory_rss,
-        avg_mem_frag_ratio
-        from app_client_statistic_gather,app_desc
-        where gather_time = '2020-06-03'
-        and app_client_statistic_gather.app_id = app_desc.app_id
-        and app_desc.is_test = 0
-        and avg_mem_frag_ratio>1.2
-        ORDER BY avg_mem_frag_ratio DESC;
-    </select>
+<!--    <select id="getFragRatioAppStatsByGatherTime" resultType="hashmap">-->
+<!--        select app_client_statistic_gather.app_id as app_id,is_test,-->
+<!--        round(used_memory/1024/1024,2) as format_used_memory,-->
+<!--        round(used_memory_rss/1024/1024,2) as format_used_memory_rss,-->
+<!--        avg_mem_frag_ratio-->
+<!--        from app_client_statistic_gather,app_desc-->
+<!--        where gather_time = '2020-06-03'-->
+<!--        and app_client_statistic_gather.app_id = app_desc.app_id-->
+<!--        and app_desc.is_test = 0-->
+<!--        and avg_mem_frag_ratio>1.2-->
+<!--        ORDER BY avg_mem_frag_ratio DESC;-->
+<!--    </select>-->
 </mapper>

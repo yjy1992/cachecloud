@@ -7,7 +7,7 @@
     	id,user_id,app_id
     </sql>
     
-    <insert id="save" parameterType="AppToUser">
+    <insert id="save" parameterType="com.sohu.cache.entity.AppToUser">
     	insert into app_to_user
     		(<include refid="app_to_user_column"/>)
 		values
@@ -15,14 +15,14 @@
     </insert>
     
     <!-- 获取用户的app -->
-    <select id="getByUserId" resultType="AppToUser" parameterType="long">
+    <select id="getByUserId" resultType="com.sohu.cache.entity.AppToUser" parameterType="long">
     	select           
         	<include refid="app_to_user_column"/>
         from app_to_user where user_id=#{userId}
     </select>
     
     <!-- 获取app的用户 -->
-    <select id="getByAppId" resultType="AppToUser" parameterType="long">
+    <select id="getByAppId" resultType="com.sohu.cache.entity.AppToUser" parameterType="long">
     	select           
         	<include refid="app_to_user_column"/>
         from app_to_user where app_id=#{appId}
@@ -33,7 +33,7 @@
     	delete from app_to_user where app_id=#{appId}
     </delete>
     
-    <select id="deleteAppToUser" parameterType="AppToUser">
+    <select id="deleteAppToUser" parameterType="com.sohu.cache.entity.AppToUser">
         delete from app_to_user where app_id=#{appId} and user_id=#{userId}
     </select>
     

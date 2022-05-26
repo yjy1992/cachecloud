@@ -16,7 +16,7 @@
     </sql>
 
     <!--返回所有可用的机器资源-->
-    <select id="getAllMachines" resultType="MachineInfo">
+    <select id="getAllMachines" resultType="com.sohu.cache.entity.MachineInfo">
         select
         id, modify_time, <include refid="machine_info_columns"/>
         from machine_info
@@ -24,7 +24,7 @@
     </select>
 
     <!--通过ip查找机器-->
-    <select id="getMachineInfoByIp" resultType="MachineInfo">
+    <select id="getMachineInfoByIp" resultType="com.sohu.cache.entity.MachineInfo">
         select
           id, modify_time, <include refid="machine_info_columns"/>
         from machine_info
@@ -32,7 +32,7 @@
     </select>
 
     <!--通过ip查找机器-->
-    <select id="getMachineInfoByLikeIp" resultType="MachineInfo">
+    <select id="getMachineInfoByLikeIp" resultType="com.sohu.cache.entity.MachineInfo">
         select
           id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where available = 1
@@ -44,7 +44,7 @@
     </select>
 
     <!--通过ip查找机器-->
-    <select id="getMachineInfoByCondition" resultType="MachineInfo">
+    <select id="getMachineInfoByCondition" resultType="com.sohu.cache.entity.MachineInfo">
         select
         id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where available = 1
@@ -81,7 +81,7 @@
     </select>
 
     <!--通过ip模糊查找机器-->
-    <select id="getMachineListByCondition" resultType="MachineInfo">
+    <select id="getMachineListByCondition" resultType="com.sohu.cache.entity.MachineInfo">
         select
         id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where available = 1
@@ -98,20 +98,20 @@
     </select>
 
     <!--通过ip real_ip查找机器-->
-    <select id="existk8sMachine" resultType="MachineInfo">
+    <select id="existk8sMachine" resultType="com.sohu.cache.entity.MachineInfo">
         select
         id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where ip = #{ip} and k8s_type=1
     </select>
 
-    <select id="getK8sMachineList" resultType="MachineInfo">
+    <select id="getK8sMachineList" resultType="com.sohu.cache.entity.MachineInfo">
         select
         id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where available = 1 and k8s_type=1
     </select>
 
     <!--通过room和useType查找机器-->
-    <select id="getMachineMemStatInfoByCondition" resultType="MachineMemStatInfo">
+    <select id="getMachineMemStatInfoByCondition" resultType="com.sohu.cache.entity.MachineMemStatInfo">
         select
         id, <include refid="machine_men_stat_info_columns"/>
         from machine_info where available = 1
@@ -127,14 +127,14 @@
         </choose>
     </select>
 
-    <select id="getMachineMemStatInfoByIp" resultType="MachineMemStatInfo">
-        select
-        id, <include refid="machine_men_stat_info_columns"/>
-        from machine_info where available = 1
-        where ip = #{ip};
-    </select>
+<!--    <select id="getMachineMemStatInfoByIp" resultType="com.sohu.cache.entity.MachineMemStatInfo">-->
+<!--        select-->
+<!--        id, <include refid="machine_men_stat_info_columns"/>-->
+<!--        from machine_info where available = 1-->
+<!--        where ip = #{ip};-->
+<!--    </select>-->
 
-    <select id="getMachineMemStatInfoByIpList" resultType="MachineMemStatInfo" parameterType="java.util.List">
+    <select id="getMachineMemStatInfoByIpList" resultType="com.sohu.cache.entity.MachineMemStatInfo" parameterType="java.util.List">
         select
         id, <include refid="machine_men_stat_info_columns"/>
         from machine_info where available = 1
@@ -145,7 +145,7 @@
     </select>
 
     <!--保存机器信息-->
-    <insert id="saveMachineInfo" parameterType="MachineInfo">
+    <insert id="saveMachineInfo" parameterType="com.sohu.cache.entity.MachineInfo">
         insert into machine_info
           (<include refid="machine_info_columns"/>)
         values
@@ -168,16 +168,16 @@
     </update>
 
     <!--通过type查找机器-->
-    <select id="getMachineInfoByType" resultType="MachineInfo">
+    <select id="getMachineInfoByType" resultType="com.sohu.cache.entity.MachineInfo">
         select
           id, modify_time, <include refid="machine_info_columns"/>
         from machine_info where type = #{type} and available = 1
     </select>
 
     <!-- 更新机器类型 -->
-    <update id="updateMachineType">
-    	update machine_info set type = #{type} where id = #{id}
-    </update>
+<!--    <update id="updateMachineType">-->
+<!--    	update machine_info set type = #{type} where id = #{id}-->
+<!--    </update>-->
 
     <select id="getTotalMachineMem" resultType="hashmap">
         SELECT sum(memory_total)/1024/1024/1024 machineTotal,sum(memory_free)/1024/1024/1024 machineFreeTotal from  machine_statistics ;

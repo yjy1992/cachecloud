@@ -61,7 +61,7 @@
     </select>
 
 
-    <select id="getAppLatencyCountStat" resultType="AppClientStatisticGather">
+    <select id="getAppLatencyCountStat" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, count(1) as latency_count, DATE_FORMAT(execute_date,'%Y-%m-%d') gather_time
         from instance_latency_history
         where execute_date between #{startTime} and #{endTime}

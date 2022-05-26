@@ -13,14 +13,14 @@
     	#{timeout}, #{orderNo}, #{createTime}, #{updateTime}
     </sql>
 
-    <insert id="save" parameterType="TaskStepMeta" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.task.entity.TaskStepMeta" keyProperty="id" useGeneratedKeys="true">
         insert into task_step_meta
         	(<include refid="task_step_meta_columns"/>)
         values
         	(<include refid="task_step_meta_fields"/>)
     </insert>
     
-    <select id="getTaskStepMetaList" resultType="TaskStepMeta">
+    <select id="getTaskStepMetaList" resultType="com.sohu.cache.task.entity.TaskStepMeta">
         select id,<include refid="task_step_meta_columns"/>
         from task_step_meta
         where class_name = #{className}

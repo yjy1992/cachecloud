@@ -7,14 +7,14 @@
     	app_id,user_id,info,create_time,type,app_audit_id
     </sql>
     
-    <insert id="save" parameterType="AppAuditLog"  keyProperty="id" useGeneratedKeys="true" >
+    <insert id="save" parameterType="com.sohu.cache.entity.AppAuditLog"  keyProperty="id" useGeneratedKeys="true" >
     	insert into app_audit_log
     		(<include refid="app_audit_log_column"/>)
 		values
 			(#{appId},#{userId},#{info},#{createTime},#{type},#{appAuditId})    	
     </insert>
     
-    <select id="getAuditByType" resultType="AppAuditLog">
+    <select id="getAuditByType" resultType="com.sohu.cache.entity.AppAuditLog">
         select id,<include refid="app_audit_log_column"/>
         from app_audit_log
         where app_audit_id=#{appAuditId} and type=#{type}

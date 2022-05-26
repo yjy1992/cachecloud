@@ -23,7 +23,7 @@
 	    count = count + #{count}, update_time=now()
 	</insert>
 	
-	<select id="getAppValueDistriList" resultType="AppClientValueDistriSimple">
+	<select id="getAppValueDistriList" resultType="com.sohu.cache.entity.AppClientValueDistriSimple">
     	select distribute_type, sum(count) as count
     	from app_client_value_minute_stats
     	where app_id=#{appId} and collect_time between #{startTime} and #{endTime}

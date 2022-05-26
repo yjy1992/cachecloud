@@ -15,13 +15,13 @@
         </foreach>
     </insert>
 
-    <select id="getByAppId" resultType="InstanceSlowLog">
+    <select id="getByAppId" resultType="com.sohu.cache.entity.InstanceSlowLog">
         select id,
         <include refid="instance_slow_log_columns"/>
         from instance_slow_log where app_id = #{appId}
     </select>
 
-    <select id="getByInstanceExecuteTime" resultType="InstanceSlowLog">
+    <select id="getByInstanceExecuteTime" resultType="com.sohu.cache.entity.InstanceSlowLog">
         select id,
         <include refid="instance_slow_log_columns"/>
         from instance_slow_log
@@ -30,7 +30,7 @@
     </select>
 
 
-    <select id="search" resultType="InstanceSlowLog">
+    <select id="search" resultType="com.sohu.cache.entity.InstanceSlowLog">
         select id,
         <include refid="instance_slow_log_columns"/>
         from instance_slow_log where app_id = #{appId} and create_time between DATE_FORMAT(#{startDate}, '%Y-%m-%d') and
@@ -47,7 +47,7 @@
         from instance_slow_log where app_id = #{appId} and execute_time between DATE_FORMAT(#{startDate}, '%Y-%m-%d') and DATE_FORMAT(#{endDate}, '%Y-%m-%d')
     </select>
 
-    <select id="getAppSlowLogCountStat" resultType="AppClientStatisticGather">
+    <select id="getAppSlowLogCountStat" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, count(*) as slowLogCount, DATE_FORMAT(execute_time,'%Y-%m-%d') gather_time
         from instance_slow_log
         where execute_time between #{startTime} and #{endTime}

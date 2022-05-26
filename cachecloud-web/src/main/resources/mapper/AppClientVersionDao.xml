@@ -6,7 +6,7 @@
 		app_id,client_ip,client_version,report_time
 	</sql>
 
-	<insert id="saveOrUpdateClientVersion" parameterType="AppClientVersion" keyProperty="id"
+	<insert id="saveOrUpdateClientVersion" parameterType="com.sohu.cache.entity.AppClientVersion" keyProperty="id"
 		useGeneratedKeys="true">
 		insert into app_client_version_statistic(<include refid="columns"/>)
 		values(#{appId},#{clientIp},#{clientVersion},#{reportTime})
@@ -14,11 +14,11 @@
 		update client_version=#{clientVersion},report_time=#{reportTime}
 	</insert>
 	
-	<select id="getByClientIp" resultType="AppClientVersion">
+	<select id="getByClientIp" resultType="com.sohu.cache.entity.AppClientVersion">
 		select id,<include refid="columns"/> from app_client_version_statistic where client_ip=#{clientIp}
 	</select>
 	
-	<select id="getAppAllClientVersion" resultType="AppClientVersion">
+	<select id="getAppAllClientVersion" resultType="com.sohu.cache.entity.AppClientVersion">
 		select id,<include refid="columns"/> from app_client_version_statistic where app_id=#{appId}
 	</select>
 
@@ -32,7 +32,7 @@
 		group by app_id
 	</select>
 	
-	<select id="getAll" resultType="AppClientVersion">
+	<select id="getAll" resultType="com.sohu.cache.entity.AppClientVersion">
 		select id,<include refid="columns"/> from app_client_version_statistic where 1=1
 		<choose>
         	<when test="appId > 0">

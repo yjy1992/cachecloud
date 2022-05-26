@@ -8,17 +8,17 @@
 	    	migrating_slot,is_pipeline,finish_slot_num,status,start_time,end_time,create_time,update_time
     </sql>
     
-    <insert id="save" parameterType="InstanceReshardProcess"  keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.entity.InstanceReshardProcess"  keyProperty="id" useGeneratedKeys="true">
 		insert into instance_reshard_process(<include refid="instance_reshard_process_column" />)
 		values(#{appId},#{auditId},#{sourceInstanceId},#{targetInstanceId},#{startSlot},#{endSlot},
 		#{migratingSlot},#{isPipeline},#{finishSlotNum},#{status},#{startTime},#{endTime},#{createTime},#{updateTime})
 	</insert>
     
-    <select id="getByAuditId" resultType="InstanceReshardProcess">
+    <select id="getByAuditId" resultType="com.sohu.cache.entity.InstanceReshardProcess">
         select id,<include refid="instance_reshard_process_column"/> from instance_reshard_process where audit_id = #{auditId}
     </select>
     
-    <select id="get" resultType="InstanceReshardProcess">
+    <select id="get" resultType="com.sohu.cache.entity.InstanceReshardProcess">
         select id,<include refid="instance_reshard_process_column"/> from instance_reshard_process where id = #{id}
     </select>
 	

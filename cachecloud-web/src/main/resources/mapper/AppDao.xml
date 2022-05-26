@@ -14,7 +14,7 @@
         forecast_obj_num,mem_alert_value,client_machine_room,app_key,client_conn_alert_value,hit_precent_alert_value,is_access_monitor,important_level,password "pkey",version_id
     </sql>
     <!--通过appId查询app的信息-->
-    <select id="getAppDescById" resultType="AppDesc" parameterType="long">
+    <select id="getAppDescById" resultType="com.sohu.cache.entity.AppDesc" parameterType="long">
         SELECT
             <include refid="app_desc_fields"/>
         FROM app_desc
@@ -22,7 +22,7 @@
     </select>
 
 
-    <select id="getOnlineAppDescById" resultType="AppDesc" parameterType="long">
+    <select id="getOnlineAppDescById" resultType="com.sohu.cache.entity.AppDesc" parameterType="long">
         SELECT
         <include refid="app_desc_fields"/>
         FROM app_desc
@@ -31,7 +31,7 @@
     </select>
 
     <!-- 根据应用名查询app信息 -->
-    <select id="getByAppName" resultType="AppDesc" parameterType="string">
+    <select id="getByAppName" resultType="com.sohu.cache.entity.AppDesc" parameterType="string">
         SELECT
             <include refid="app_desc_fields"/>
         FROM app_desc
@@ -39,7 +39,7 @@
     </select>
 
 
-    <insert id="save" parameterType="AppDesc"  keyProperty="appId" useGeneratedKeys="true" >
+    <insert id="save" parameterType="com.sohu.cache.entity.AppDesc"  keyProperty="appId" useGeneratedKeys="true" >
     	insert into app_desc
     		(<include refid="app_desc_add_fields"/>)
 		values
@@ -51,7 +51,7 @@
             )
     </insert>
 
-    <update id="update" parameterType="AppDesc">
+    <update id="update" parameterType="com.sohu.cache.entity.AppDesc">
     	update app_desc 
     		set name=#{name}, user_id=#{userId}, status=#{status}, intro=#{intro}, create_time=#{createTime},
     			passed_time=#{passedTime},type=#{type},
@@ -64,13 +64,13 @@
     <sql id="app_desc_select_column">
     	app_desc.app_id,name,app_desc.user_id,status,intro,create_time,passed_time,type,officer,ver_id,app_key,password "pkey",version_id,is_test
     </sql>
-    <select id="getAppDescList" resultType="AppDesc" parameterType="long">
+    <select id="getAppDescList" resultType="com.sohu.cache.entity.AppDesc" parameterType="long">
     	select
         	<include refid="app_desc_select_column"/>
         from app_desc,app_to_user where app_to_user.user_id=#{userId} and app_to_user.app_id=app_desc.app_id and app_desc.status &lt; 3
     </select>
 
-    <select id="getOnlineApps" resultType="AppDesc">
+    <select id="getOnlineApps" resultType="com.sohu.cache.entity.AppDesc">
         select
         <include refid="app_desc_select_column"/>
         from app_desc
@@ -78,14 +78,14 @@
     </select>
 
 
-    <select id="getOnlineAppsNonTest" resultType="AppDesc">
+    <select id="getOnlineAppsNonTest" resultType="com.sohu.cache.entity.AppDesc">
         select
         <include refid="app_desc_select_column"/>
         from app_desc
         where status = 2 AND is_test = 0
     </select>
 
-    <select id="getAllApps" resultType="AppDesc">
+    <select id="getAllApps" resultType="com.sohu.cache.entity.AppDesc">
         select
         <include refid="app_desc_select_column"/>
         from app_desc
@@ -96,7 +96,7 @@
     	select count(app_desc.app_id) from app_desc,app_to_user where app_to_user.user_id=#{userId} and app_to_user.app_id=app_desc.app_id and app_desc.status &lt; 3
     </select>
 
-    <select id="getAllAppCount" resultType="int" parameterType="AppSearch">
+    <select id="getAllAppCount" resultType="int" parameterType="com.sohu.cache.entity.AppSearch">
     	select count(app_id) from app_desc where 1=1 and status &lt; 3
         <choose>
             <when test="appName != null and appName != ''">
@@ -135,7 +135,7 @@
         </choose>
     </select>
 
-    <select id="getAllAppDescList" resultType="AppDesc" parameterType="AppSearch">
+    <select id="getAllAppDescList" resultType="com.sohu.cache.entity.AppDesc" parameterType="com.sohu.cache.entity.AppSearch">
     	select
         	<include refid="app_desc_fields"/>
         from app_desc where 1=1 and status &lt; 3
@@ -194,7 +194,7 @@
         </choose>
     </select>
 
-    <select id="getTotalAppCount" resultType="int" parameterType="AppSearch">
+    <select id="getTotalAppCount" resultType="int" parameterType="com.sohu.cache.entity.AppSearch">
         select count(app_id) from app_desc
     </select>
 
@@ -202,7 +202,7 @@
     	update app_desc set app_key=#{appKey} where app_id=#{appId}
     </update>
 
-    <select id="getAppDescByIds" resultType="AppDesc" parameterType="java.util.List">
+    <select id="getAppDescByIds" resultType="com.sohu.cache.entity.AppDesc" parameterType="java.util.List">
         select * from app_desc where app_id in
         <foreach collection="appIds" index="index" item="appId" open="(" separator="," close=")">
             #{appId}

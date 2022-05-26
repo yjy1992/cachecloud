@@ -40,7 +40,7 @@
         app_id,collect_time,command_name,command_count,modify_time
     </sql>
 
-    <insert id="mergeMinuteAppStats" parameterType="AppStats">
+    <insert id="mergeMinuteAppStats" parameterType="com.sohu.cache.entity.AppStats">
         insert into app_minute_statistics
         (<include refid="app_minute_statistics_columns"/>)
         values
@@ -69,7 +69,7 @@
         accumulation = accumulation + 1
     </insert>
 
-    <insert id="mergeMinuteCommandStatus" parameterType="AppCommandStats">
+    <insert id="mergeMinuteCommandStatus" parameterType="com.sohu.cache.entity.AppCommandStats">
         insert into app_minute_command_statistics
         (<include refid="app_minute_command_statistics_columns"/>)
         values
@@ -79,7 +79,7 @@
         modify_time = #{modifyTime}
     </insert>
 
-    <insert id="mergeHourAppStats" parameterType="AppStats">
+    <insert id="mergeHourAppStats" parameterType="com.sohu.cache.entity.AppStats">
         insert into app_hour_statistics
         (<include refid="app_minute_statistics_columns"/>)
         values
@@ -108,7 +108,7 @@
         accumulation = accumulation + 1
     </insert>
 
-    <insert id="mergeHourCommandStatus" parameterType="AppCommandStats">
+    <insert id="mergeHourCommandStatus" parameterType="com.sohu.cache.entity.AppCommandStats">
         insert into app_hour_command_statistics
         (<include refid="app_minute_command_statistics_columns"/>)
         values
@@ -118,7 +118,7 @@
         modify_time = #{modifyTime}
     </insert>
 
-    <select id="getAppStatsList" resultType="AppStats">
+    <select id="getAppStatsList" resultType="com.sohu.cache.entity.AppStats">
         select
         <include refid="select_stat_filed"/>,create_time
         from
@@ -127,7 +127,7 @@
         app_id = #{appId} and collect_time between #{td.begin} and #{td.end}
     </select>
 
-    <select id="getAppStatsByMinute" resultType="AppStats">
+    <select id="getAppStatsByMinute" resultType="com.sohu.cache.entity.AppStats">
         select
         <include refid="app_minute_statistics_columns"/>
         , create_time
@@ -137,7 +137,7 @@
     </select>
 
 
-    <select id="gatherAppsStats" resultType="AppClientStatisticGather">
+    <select id="gatherAppsStats" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id,
         DATE_FORMAT(create_time, '%Y-%m-%d') gather_time,
         object_size,
@@ -152,7 +152,7 @@
     </select>
 
 
-    <select id="getAppStatsByHour" resultType="AppStats">
+    <select id="getAppStatsByHour" resultType="com.sohu.cache.entity.AppStats">
         select
         <include refid="app_minute_statistics_columns"/>
         , create_time
@@ -162,7 +162,7 @@
     </select>
 
 
-    <select id="getAppCommandStatsList" resultType="AppCommandStats">
+    <select id="getAppCommandStatsList" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         <include refid="app_minute_command_statistics_columns"/>
         , create_time
@@ -174,7 +174,7 @@
         and collect_time between #{td.begin} and #{td.end}
     </select>
 
-    <select id="getAppAllCommandStatsListByMinute" resultType="AppCommandStats">
+    <select id="getAppAllCommandStatsListByMinute" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         app_id,
         collect_time,
@@ -189,7 +189,7 @@
     </select>
 
 
-    <select id="getAppAllCommandStatsListByHour" resultType="AppCommandStats">
+    <select id="getAppAllCommandStatsListByHour" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         app_id,
         collect_time,
@@ -203,7 +203,7 @@
           and collect_time between #{beginTime} and #{endTime}
     </select>
 
-    <select id="getAppCommandStatsListByMinuteWithCommand" resultType="AppCommandStats">
+    <select id="getAppCommandStatsListByMinuteWithCommand" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         <include refid="app_minute_command_statistics_columns"/>
         , create_time
@@ -215,7 +215,7 @@
     </select>
 
 
-    <select id="getAppCommandStatsListByHourWithCommand" resultType="AppCommandStats">
+    <select id="getAppCommandStatsListByHourWithCommand" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         <include refid="app_minute_command_statistics_columns"/>
         , create_time
@@ -227,7 +227,7 @@
     </select>
 
 
-    <select id="getAppAllCommandStatsList" resultType="AppCommandStats">
+    <select id="getAppAllCommandStatsList" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         app_id,
         collect_time,
@@ -243,7 +243,7 @@
     </select>
 
     <!-- 获取应用命令调用次数分布 -->
-    <select id="getAppCommandGroup" resultType="AppCommandGroup">
+    <select id="getAppCommandGroup" resultType="com.sohu.cache.entity.AppCommandGroup">
         select
         command_name,sum(command_count) as count
         from
@@ -255,7 +255,7 @@
     </select>
 
     <!--查询一天中应用的命令执行次数的top-->
-    <select id="getTopAppCommandStatsList" resultType="AppCommandStats">
+    <select id="getTopAppCommandStatsList" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         app_id, command_name , max(collect_time) collect_time, sum(command_count) command_count ,
         max(modify_time) modify_time, max(create_time) create_time
@@ -269,7 +269,7 @@
     </select>
 
 
-    <select id="getTopAppCommandGroupSum" resultType="AppCommandStats">
+    <select id="getTopAppCommandGroupSum" resultType="com.sohu.cache.entity.AppCommandStats">
         select
         app_id,collect_time,command_name,sum(command_count) as command_count,modify_time, create_time
         from
@@ -281,7 +281,7 @@
         limit #{top};
     </select>
 
-    <select id="getCommandClimax" resultType="AppCommandStats">
+    <select id="getCommandClimax" resultType="com.sohu.cache.entity.AppCommandStats">
         select t2.*
         from (select app_id, command_name, max(command_count) command_count
         from
@@ -300,14 +300,14 @@
         limit 1;
     </select>
 
-    <select id="getCommandClimaxCount" resultType="AppCommandStats">
+    <select id="getCommandClimaxCount" resultType="com.sohu.cache.entity.AppCommandStats">
         select max(command_count) as command_count
         from
         <include refid="select_table"/>
         where app_id = #{appId} and collect_time between #{td.begin} and #{td.end} and command_name = #{commandName}
     </select>
 
-    <select id="getCommandClimaxCreateTime" resultType="AppCommandStats">
+    <select id="getCommandClimaxCreateTime" resultType="com.sohu.cache.entity.AppCommandStats">
         select create_time
         from
         <include refid="select_table"/>
@@ -338,7 +338,7 @@
         where app_id = #{appId} and collect_time between #{beginTime} and #{endTime}
     </select>
 
-    <select id="getTopMemFragRatioApps" resultType="AppTopMemFragRatio">
+    <select id="getTopMemFragRatioApps" resultType="com.sohu.cache.entity.AppTopMemFragRatio">
         select c.app_id,c.name,c.officer,c.status,c.intro,c.is_test,a.instanceCount,a.avgMemFragRatio,a.memUsedRatio,b.exceptionCount,d.name as versionName
         from
         (select app_id,count(id) as instanceCount,format(avg(mem_fragmentation_ratio),2) as avgMemFragRatio, round(sum(used_memory)/sum(max_memory)*100,2) as memUsedRatio
@@ -358,14 +358,14 @@
         where c.status=2;
     </select>
 
-    <select id="getMemFragRatios" resultType="AppClientStatisticGather">
+    <select id="getMemFragRatios" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, count(id) as instanceCount, format(avg(mem_fragmentation_ratio),2) as avgMemFragRatio, round(sum(used_memory)/sum(max_memory)*100,2) as memUsedRatio, DATE_FORMAT(modify_time,'%Y-%m-%d') gather_time
         FROM instance_statistics
         WHERE modify_time between #{startTime} and #{endTime}
         group by app_id
     </select>
 
-    <select id="getExceptionCount" resultType="AppClientStatisticGather">
+    <select id="getExceptionCount" resultType="com.sohu.cache.entity.AppClientStatisticGather">
         select app_id, sum(exception_count) as exceptionCount, DATE_FORMAT(collect_time,'%Y-%m-%d') gather_time
         FROM app_client_exception_minute_stat
         WHERE collect_time between #{startTime} and #{endTime}

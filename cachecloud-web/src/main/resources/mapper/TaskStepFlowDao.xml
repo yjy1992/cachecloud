@@ -13,14 +13,14 @@
     	#{log}, #{startTime}, #{endTime}, #{createTime}, #{updateTime}, #{childTaskId}
     </sql>
 
-    <insert id="save" parameterType="TaskStepFlow" keyProperty="id" useGeneratedKeys="true">
+    <insert id="save" parameterType="com.sohu.cache.task.entity.TaskStepFlow" keyProperty="id" useGeneratedKeys="true">
         insert into task_step_flow
         (<include refid="task_step_flow_columns"/>)
         values
         (<include refid="task_step_flow_fields"/>)
     </insert>
 
-    <select id="getByTaskClassStep" resultType="TaskStepFlow">
+    <select id="getByTaskClassStep" resultType="com.sohu.cache.task.entity.TaskStepFlow">
         select id,<include refid="task_step_flow_columns"/>, execute_ip_port
         from task_step_flow
         where task_id = #{taskId} and class_name = #{className} and step_name = #{stepName}
@@ -50,7 +50,7 @@
     	update task_step_flow set execute_ip_port = #{executeIpPort} where id = #{taskId}
     </update>
 
-    <select id="getTaskStepFlowList" resultType="TaskStepFlow">
+    <select id="getTaskStepFlowList" resultType="com.sohu.cache.task.entity.TaskStepFlow">
         select id,<include refid="task_step_flow_columns"/>, execute_ip_port
         from task_step_flow
         where task_id = #{taskId} order by order_no

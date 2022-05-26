@@ -12,7 +12,7 @@
     </sql>
 
     <!--保存机器当前最新的统计信息-->
-    <insert id="mergeMachineStats" parameterType="MachineStats">
+    <insert id="mergeMachineStats" parameterType="com.sohu.cache.entity.MachineStats">
         insert into machine_statistics
           (<include refid="machine_statistics_columns"/>)
         values
@@ -32,7 +32,7 @@
     </insert>
 
     <!--查询机器下的所有实例的静态信息-->
-    <select id="getInstInfoOfMachine" resultType="InstanceInfo">
+    <select id="getInstInfoOfMachine" resultType="com.sohu.cache.entity.InstanceInfo">
         SELECT
            <include refid="instance_info_columns"/>
         FROM
@@ -46,7 +46,7 @@
     </select>
 
     <!--查询机器下的所有实例的最新状态信息-->
-    <select id="getInstStatOfMachine" resultType="InstanceStats" parameterType="long">
+    <select id="getInstStatOfMachine" resultType="com.sohu.cache.entity.InstanceStats" parameterType="long">
         SELECT istat.*
         FROM machine_statistics as mstat, instance_statistics AS istat
         WHERE mstat.host_id = #{hostId}
@@ -54,7 +54,7 @@
         ORDER BY istat.max_memory DESC;
     </select>
 
-    <select id="getMachineStats" resultType="MachineStats">
+    <select id="getMachineStats" resultType="com.sohu.cache.entity.MachineStats">
         select
           id,<include refid="machine_statistics_columns"/>
         from machine_statistics
@@ -65,14 +65,14 @@
         </choose>
     </select>
     
-    <select id="getAllMachineStats" resultType="MachineStats">
+    <select id="getAllMachineStats" resultType="com.sohu.cache.entity.MachineStats">
         select
           id,<include refid="machine_statistics_columns"/>
         from machine_statistics
     </select>
 
     <!--根据机器的ip查询机器的最新状态信息-->
-    <select id="getMachineStatsByIp" resultType="MachineStats">
+    <select id="getMachineStatsByIp" resultType="com.sohu.cache.entity.MachineStats">
         select
           id,<include refid="machine_statistics_columns"/>
         from machine_statistics
@@ -80,7 +80,7 @@
     </select>
 
     <!--根据机器的hostId查询机器的最新状态信息-->
-    <select id="getMachineStatsByHostId" resultType="MachineStats" parameterType="long">
+    <select id="getMachineStatsByHostId" resultType="com.sohu.cache.entity.MachineStats" parameterType="long">
         select
           id,<include refid="machine_statistics_columns"/>
         from machine_statistics

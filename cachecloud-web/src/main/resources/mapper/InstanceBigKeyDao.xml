@@ -22,7 +22,7 @@
         from instance_big_key where app_id = #{appId} and audit_id = #{auditId}
     </select>
     
-    <select id="getAppBigKeyList" resultType="InstanceBigKey">
+    <select id="getAppBigKeyList" resultType="com.sohu.cache.task.entity.InstanceBigKey">
         select id,<include refid="instance_big_key_columns"/>
         from instance_big_key where app_id = #{appId} and audit_id = #{auditId}
         <choose>

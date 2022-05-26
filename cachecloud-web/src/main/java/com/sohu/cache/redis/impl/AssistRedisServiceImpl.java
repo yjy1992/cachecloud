@@ -51,6 +51,7 @@ public class AssistRedisServiceImpl implements AssistRedisService {
      */
     private Jedis getFromJedisPool() {
         try {
+
             return jedisPoolMain.getResource();
         } catch (JedisConnectionException ce){
             logger.warn("Please Make sure the file:application-${profile}.yml connection pool is configured correctly !  cachecloud.redis.main.host:{} cachecloud.redis.main.port:{} cachecloud.redis.main.password:{}",mainHost,mainPort,mainPassword);

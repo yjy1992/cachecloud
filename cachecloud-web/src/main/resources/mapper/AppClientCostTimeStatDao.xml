@@ -8,7 +8,7 @@
 		count,instance_host,instance_port,instance_id
 	</sql>
 
-	<insert id="save" parameterType="AppClientCostTimeStat"
+	<insert id="save" parameterType="com.sohu.cache.entity.AppClientCostTimeStat"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into app_client_costtime_minute_stat(<include refid="columns"/>)
 		values(#{appId},#{collectTime},#{clientIp},#{reportTime},#{createTime},#{command},
@@ -26,7 +26,7 @@
 	    </foreach>
 	</insert>
 	
-    <select id="getAppCommandClientToInstanceStat" resultType="AppClientCostTimeStat">
+    <select id="getAppCommandClientToInstanceStat" resultType="com.sohu.cache.entity.AppClientCostTimeStat">
     	select id,<include refid="columns"/>
     	from app_client_costtime_minute_stat
     	where app_id=#{appId} and instance_id=#{instanceId} and client_ip=#{clientIp} and collect_time between #{startTime} and #{endTime} and command=#{command};

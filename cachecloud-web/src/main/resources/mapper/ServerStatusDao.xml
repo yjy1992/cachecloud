@@ -5,12 +5,12 @@
 <mapper namespace="com.sohu.cache.dao.ServerStatusDao">
 	
 	<!-- 获取服务器信息 -->
-    <select id="queryServerInfo" resultType="ServerInfo">
+    <select id="queryServerInfo" resultType="com.sohu.cache.entity.ServerInfo">
     	select ip,host,nmon,cpus,cpu_model cpuModel,dist,kernel,ulimit
         from server where ip=#{ip}
     </select>
 
-	<select id="getAllServerInfo" resultType="ServerInfo">
+	<select id="getAllServerInfo" resultType="com.sohu.cache.entity.ServerInfo">
 		SELECT ser.ip,ser.dist from machine_info machine, server ser
 		where machine.ip = ser.ip and machine.available=1
 	</select>
@@ -34,7 +34,7 @@
     </insert>
     
     <!-- 获取服务器状态 -->
-    <select id="queryServerOverview" resultType="ServerStatus">
+    <select id="queryServerOverview" resultType="com.sohu.cache.entity.ServerStatus">
     	select ip,cdate,ctime,cuser,csys,cwio,cload1,cload5,cload15,
 			   mtotal,mfree,mcache,mbuffer,mswap,mswap_free mswapFree,
 			   nin,nout,tuse,torphan,twait,
@@ -44,35 +44,35 @@
     </select>
     
     <!-- 获取服务器cpu状态 -->
-    <select id="queryServerCpu" resultType="ServerStatus">
+    <select id="queryServerCpu" resultType="com.sohu.cache.entity.ServerStatus">
     	select ctime, c_ext cExt
 		from server_stat
 		where ip=#{ip} and cdate=#{cdate}
     </select>
     
     <!-- 获取服务器net状态 -->
-    <select id="queryServerNet" resultType="ServerStatus">
+    <select id="queryServerNet" resultType="com.sohu.cache.entity.ServerStatus">
     	select ctime, nin_ext ninExt,nout_ext noutExt
 		from server_stat
 		where ip=#{ip} and cdate=#{cdate}
     </select>
     
     <!-- 获取服务器disk状态 -->
-    <select id="queryServerDisk" resultType="ServerStatus">
+    <select id="queryServerDisk" resultType="com.sohu.cache.entity.ServerStatus">
     	select ctime, d_ext dExt,dspace
 		from server_stat
 		where ip=#{ip} and cdate=#{cdate}
     </select>
     
     <!-- 获取服务器状态 -->
-    <select id="queryServerStat" resultType="ServerStatus">
-    	select ip,cdate,ctime,cuser,csys,cwio,c_ext cExt,cload1,cload5,cload15,
-			   mtotal,mfree,mcache,mbuffer,mswap,mswap_free mswapFree,
-			   nin,nout,nin_ext ninExt,nout_ext noutExt,tuse,torphan,twait,
-			   dread,dwrite,diops,dbusy,d_ext dExt,dspace"
-		from server_stat
-		where ip=#{ip} and cdate=#{cdate}
-    </select>
+<!--    <select id="queryServerStat" resultType="com.sohu.cache.entity.ServerStatus">-->
+<!--    	select ip,cdate,ctime,cuser,csys,cwio,c_ext cExt,cload1,cload5,cload15,-->
+<!--			   mtotal,mfree,mcache,mbuffer,mswap,mswap_free mswapFree,-->
+<!--			   nin,nout,nin_ext ninExt,nout_ext noutExt,tuse,torphan,twait,-->
+<!--			   dread,dwrite,diops,dbusy,d_ext dExt,dspace"-->
+<!--		from server_stat-->
+<!--		where ip=#{ip} and cdate=#{cdate}-->
+<!--    </select>-->
     
     <!-- 保存服务器状态-->
     <insert id="saveServerStat">

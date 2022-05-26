@@ -7,7 +7,7 @@
         ip,real_ip,update_time,status,extra_desc
     </sql>
 
-    <insert id="saveOrUpdateMachineRelation" parameterType="MachineRelation" keyProperty="id" useGeneratedKeys="true">
+    <insert id="saveOrUpdateMachineRelation" parameterType="com.sohu.cache.entity.MachineRelation" keyProperty="id" useGeneratedKeys="true">
         insert into machine_relation(<include refid="columns"/>)
         values(#{ip},#{realIp},#{updateTime},#{status},#{extraDesc})
         on duplicate key
@@ -18,7 +18,7 @@
         update machine_relation set taskid = #{taskid}, is_sync= #{is_sync} where id = #{id}
     </update>
 
-    <select id="getRelationList" resultType="MachineRelation">
+    <select id="getRelationList" resultType="com.sohu.cache.entity.MachineRelation">
         select * from machine_relation
         <choose>
             <when test="ip != '' and ip != null">
@@ -28,7 +28,7 @@
         ORDER BY ip,update_time DESC
     </select>
 
-    <select id="getOnlinePodList" resultType="MachineRelation">
+    <select id="getOnlinePodList" resultType="com.sohu.cache.entity.MachineRelation">
         select * from machine_relation where 1 = 1 and status = #{status}
         <choose>
             <when test="ip != '' and ip != null">
@@ -38,7 +38,7 @@
         ORDER BY ip,update_time DESC
     </select>
 
-    <select id="getUnSyncRelationList" resultType="MachineRelation">
+    <select id="getUnSyncRelationList" resultType="com.sohu.cache.entity.MachineRelation">
         select * from machine_relation where ip = #{ip} and real_ip= #{real_ip} and is_sync in (0,-1)
     </select>
 
@@ -46,7 +46,7 @@
         update machine_relation set is_sync=#{is_sync},sync_time=now() where id = #{id}
     </update>
     
-    <select id="getMachineSyncStatus" resultType="MachineRelation">
+    <select id="getMachineSyncStatus" resultType="com.sohu.cache.entity.MachineRelation">
         select * from machine_relation where ip = #{ip} and real_ip= #{real_ip} and is_sync = #{is_sync}
     </select>
     
