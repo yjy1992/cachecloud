@@ -39,7 +39,8 @@ public class NMONFileFactory {
 		        		classpath = classpath.substring(FILE.length()+1);
 		        	}
 		        	if(new File(classpath).isDirectory()) {
-		        		path = classpath+"../.."+NMON_PATH;
+//		        		path = classpath+"../.."+NMON_PATH;
+		        		path = classpath+"static"+NMON_PATH;
 		        	} else {
 		        		//like that: /opt/app/cachecloud/cachecloud-web-1.0-SNAPSHOT.war!/WEB-INF/classes!/
 		        		String[] tmp = classpath.split("!/", 2);

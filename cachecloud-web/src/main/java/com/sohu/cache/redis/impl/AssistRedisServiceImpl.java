@@ -2,6 +2,7 @@ package com.sohu.cache.redis.impl;
 
 import com.sohu.cache.redis.AssistRedisService;
 import com.sohu.cache.redis.util.ProtostuffSerializer;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,9 @@ public class AssistRedisServiceImpl implements AssistRedisService {
     @PostConstruct
     public void init() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+        if (StringUtils.isBlank(mainPassword)) {
+            mainPassword = null;
+        }
         jedisPoolMain = new JedisPool(config, mainHost, mainPort, Protocol.DEFAULT_TIMEOUT, mainPassword);
     }
 

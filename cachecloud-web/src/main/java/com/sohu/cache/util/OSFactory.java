@@ -73,8 +73,12 @@ public class OSFactory {
 		//没有找到匹配的版本，使用默认
 		if(findType == null) {
 			logger.warn("dist cannot matched, {}", issue);
-			OS os = new OS(osType, defaultDist, version, defaultArch);
-			return os;
+			findType = DistributionType.findByContains(uname);
+			if (findType == null) {
+				logger.warn("dist cannot matched, {}", uname);
+				OS os = new OS(osType, defaultDist, version, defaultArch);
+				return os;
+			}
 		}
 		
 		//最后解析版本号

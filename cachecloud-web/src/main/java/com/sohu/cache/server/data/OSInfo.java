@@ -186,6 +186,15 @@ public class OSInfo {
 			}
 			return null;
 		}
+
+		public static DistributionType findByContainsForUname(String uname) {
+			for(DistributionType type : values()) {
+				if(uname.contains(type.getDistSign())) {
+					return type;
+				}
+			}
+			return null;
+		}
 	}
 	
 	/**
